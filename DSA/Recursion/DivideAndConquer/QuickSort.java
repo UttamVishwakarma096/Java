@@ -39,7 +39,7 @@ public class QuickSort {
         quickSort(arr, start, high);
     }    
     public static void main(String[] args) {
-        int[] arr = {6, 3, 9, 5, 2, 8, 4, 12, 7};
+        int[] arr = {6, 3, 9, 5, 2, 8};
 
         System.out.print("Original Array : ");
         printArray(arr);
