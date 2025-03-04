@@ -13,7 +13,7 @@ public class Queue {
             this.next = null;
         }
     }
-
+ 
     public boolean isEmpty() {
         return head == null && tail == null;
     }
