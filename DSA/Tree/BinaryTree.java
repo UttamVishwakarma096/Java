@@ -3,7 +3,7 @@ package DSA.Tree;
 public class BinaryTree {
     static int i = -1;
 
-    class Node {
+    public class Node { // Tree Node
         int data;
         Node left;
         Node right;
@@ -12,6 +12,48 @@ public class BinaryTree {
             this.data = data;
             this.left = null;
             this.right = null;
+        }
+    }
+
+    public class Queue { // Implementing Queue
+        QNode head;      // for Level Order Traversal
+        QNode tail;
+
+        public class QNode {
+            Node node;
+            QNode next;
+
+            public QNode(Node node) {
+                this.node = node;
+                this.next = null;
+            }
+        }
+
+        public void add(Node node) {
+            QNode newNode = new QNode(node);
+            if(head == null) {
+                head = newNode;
+                tail = newNode;
+                return;
+            }
+            tail.next = newNode;
+            tail = newNode;
+        }
+
+        public Node remove() {
+            if(head == null) {
+                return null;
+            }
+            Node removedNode = head.node;
+            head = head.next;
+            if(head == null) {
+                tail = null;
+            }
+            return removedNode;
+        }
+
+        public boolean isEmpty() {
+            return head == null && tail == null;          
         }
     }
 
@@ -53,6 +95,36 @@ public class BinaryTree {
         postOrder(root.right);
         System.out.print(root.data+" ");
     }
+
+    public void levelOrder(Node root) { // Example of BFS
+        if(root == null) {
+            return;
+        }
+        Queue queue = new Queue();
+        queue.add(root);
+        queue.add(null);
+
+        while(!queue.isEmpty()) {
+            Node currNode = queue.remove();
+            if(currNode == null) {
+                System.out.println();
+                if(queue.isEmpty()) {
+                    break;
+                } else {
+                    queue.add(null);
+                }
+            } else {
+                System.out.print(currNode.data+" ");
+                if(currNode.left != null) {
+                    queue.add(currNode.left);
+                }
+                if(currNode.right != null) {
+                    queue.add(currNode.right);
+                }
+            }
+        }
+    }
+
     public static void main(String[] args) {
         int[] node = {1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1};
         BinaryTree tree = new BinaryTree();
@@ -68,5 +140,11 @@ public class BinaryTree {
 
         System.out.print("Post Order Traversal : ");
         tree.postOrder(root);
+        System.out.println();
+
+        System.out.println("Level Order Traversal : ");
+        tree.levelOrder(root);
+        System.out.println();
+
     }
 }
