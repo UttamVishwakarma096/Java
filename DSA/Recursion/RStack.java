@@ -70,17 +70,26 @@ public class RStack { //Deleting Middle Element
         if(i == mid - 1) {
             if(this.getSize() % 2 == 0) {
                 currHead.next = currHead.next.next.next;
-                Size -= 2;
+                Size -= 2;//deleting 2 node if stack is of even size
                 return;
             } else {
                 currHead.next = currHead.next.next;
-                Size--;
+                Size--;//deleting 1 node if stack is of odd size
                 return;
             }
         }
         deleteMidNode(currHead.next, i+1, mid);
     }
 
+    public Node reverseStack(Node head) {
+        if(head == null || head.next == null) {
+            return head;
+        }
+        Node newHead = reverseStack(head.next);
+        head.next.next = head;
+        head.next = null;
+        return newHead;
+    }
     public static void main(String[] args) {
         RStack stack = new RStack();
         stack.push(1);
@@ -88,18 +97,12 @@ public class RStack { //Deleting Middle Element
         stack.push(4);
         stack.push(8);
         stack.push(16);
-        stack.push(32);
-        stack.push(64);
-
+        
         System.out.println("Original Stack: ");
         stack.printStack();
-        System.out.println("Size of Stack: "+stack.getSize());
 
-        int middle = stack.Mid(stack.getSize());
-        stack.deleteMidNode(stack.head, 1, middle);
-
-        System.out.println("New Stack: ");
+        System.out.println("Reversed Stack: ");
+        stack.head = stack.reverseStack(stack.head);
         stack.printStack();
-        System.out.println("Size of Stack: "+stack.getSize());
     }
 }
