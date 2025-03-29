@@ -51,7 +51,7 @@ public class QBinaryTree {
         int myHeight = Math.max(leftHeight, rightHeight) + 1;
         return myHeight;
     }
-
+ 
     public int diameter(Node root) {
         if(root == null) {
             return 0;
@@ -65,7 +65,7 @@ public class QBinaryTree {
         int[] node = {1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1};
         QBinaryTree tree = new QBinaryTree();
         Node root = tree.BuildTree(node);
-
+ 
         System.out.println("Total no of Nodes : "+tree.countOfNodes(root));
         System.out.println("Sum of Nodes value : "+tree.sumOfNodes(root));
         System.out.println("Height of Tree : "+tree.height(root));
