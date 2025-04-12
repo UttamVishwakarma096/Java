@@ -66,9 +66,6 @@ public class QBinaryTree {
         QBinaryTree tree = new QBinaryTree();
         Node root = tree.BuildTree(node);
  
-        System.out.println("Total no of Nodes : "+tree.countOfNodes(root));
-        System.out.println("Sum of Nodes value : "+tree.sumOfNodes(root));
-        System.out.println("Height of Tree : "+tree.height(root));
-        System.out.println("Diameter of Tree : "+tree.diameter(root));
+        System.out.println("Diameter of Tree: "+tree.diameter(root));
     }
 }

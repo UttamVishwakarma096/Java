@@ -125,26 +125,49 @@ public class BinaryTree {
         }
     }
 
+    public int sumOfNodeAtKth(int k, Node root){
+        if(root == null){
+            return 0;
+        }
+        Queue queue = new Queue();
+        int level = 0;
+        int sum = 0;
+        queue.add(root);
+        queue.add(null);
+
+        while(!queue.isEmpty()) {
+            Node currNode = queue.remove();
+            if(currNode == null) {
+                level++;
+                if(queue.isEmpty()) {
+                    break;
+                } 
+                queue.add(null);
+            } else {
+                if(level == k) {
+                    sum += currNode.data;
+                }
+                if(currNode.left != null) {
+                    queue.add(currNode.left);
+                }
+                if(currNode.right != null) {
+                    queue.add(currNode.right);
+                }
+            }
+        }
+        return sum;
+    }
+
     public static void main(String[] args) {
         int[] node = {1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1};
         BinaryTree tree = new BinaryTree();
         Node root = tree.BuildTree(node);
 
-        System.out.print("Pre Order Traversal : ");
-        tree.preOrder(root);
-        System.out.println();
-
-        System.out.print("In Orede Traversal : ");
-        tree.inOrder(root);
-        System.out.println();
-
-        System.out.print("Post Order Traversal : ");
-        tree.postOrder(root);
-        System.out.println();
-
         System.out.println("Level Order Traversal : ");
         tree.levelOrder(root);
         System.out.println();
 
+        int val = tree.sumOfNodeAtKth(1, root);
+        System.out.println("Sum of Nodes at Kth level: "+val);
     }
 }
